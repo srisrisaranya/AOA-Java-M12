@@ -10,22 +10,85 @@ Write a program to find the minimum number of jumps required to reach the last i
 
 If it is not possible to reach the end, return -1.
 ## Algorithm
-1. 
-2. 
-3. 
-4.  
-5.   
+```
+1. Read input:
+Number of elements n.
+Array nums[] of size n, where each element represents the maximum jump length from that position.
+2. Handle base cases:
+If n <= 1, no jump is needed → return 0.
+If nums[0] == 0, the end cannot be reached → return -1.
+3. Initialize variables:
+jumps = 0 → to count the number of jumps made.
+currentReach = 0 → farthest index reachable with the current number of jumps.
+maxReach = 0 → farthest index reachable from all positions checked so far.
+4. Iterate through the array (from index 0 to n-2):
+Update maxReach = max(maxReach, i + nums[i]) to find how far we can reach from index i.
+5. If i == currentReach:
+Increment jumps (we’ve used one jump).
+Update currentReach = maxReach (update the boundary for the next jump).
+If currentReach >= n - 1, return jumps (end can be reached).
+If currentReach == i, return -1 (no further progress possible).
+6. If the loop ends without reaching the last index, return -1.
+7. Display the result:
+Print "Minimum jumps to reach last index: " followed by the number of jumps.
+ 
+```   
 
 ## Program:
 ```
 /*
 Program to implement Reverse a String
-Developed by: 
-Register Number:  
+Developed by: SARANYA S
+Register Number: 212223110044 
 */
 ```
 
+```
+import java.util.Scanner;
+
+public class MinJumpToEnd {
+
+    // Function to return minimum jumps to reach end
+    public static int minimumJumps(int[] nums) {
+        // Type Your Code Here.
+        if(nums.length<=1) return 0;
+        if(nums[0]==0) return -1;
+        int jump=0;
+        int cur=0;
+        int far=0;
+        for(int i=0;i<nums.length;i++){
+            far=Math.max(far,i+nums[i]);
+            if(i==cur){
+                jump++;
+                cur=far;
+            }
+            if(cur>=nums.length-1){
+                break;
+            }
+            if(cur==i) return -1;
+        }
+        return cur>=nums.length-1?jump:-1;
+    }
+
+    // Main method to handle input and output
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); // Number of elements
+        int[] nums = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        System.out.println("Minimum jumps to reach last index: " + minimumJumps(nums));
+    }
+}
+
+```
+
 ## Output:
+
+<img width="929" height="306" alt="image" src="https://github.com/user-attachments/assets/a7c5ca32-2ecf-42f7-a698-0fedc69fe5eb" />
 
 
 
